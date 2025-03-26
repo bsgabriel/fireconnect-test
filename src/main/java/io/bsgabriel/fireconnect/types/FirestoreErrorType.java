@@ -1,4 +1,4 @@
-package fireconnect.types;
+package io.bsgabriel.fireconnect.types;
 
 public enum FirestoreErrorType {
     FIRESTORE_DATA_CREATION,

@@ -1,19 +1,19 @@
-package fireconnect.service;
+package io.bsgabriel.fireconnect.service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.DocumentSnapshot;
 import com.google.cloud.firestore.Firestore;
-import fireconnect.entity.AbstractFirestoreEntity;
-import fireconnect.exceptions.FirestoreExecuteException;
+import io.bsgabriel.fireconnect.entity.AbstractFirestoreEntity;
+import io.bsgabriel.fireconnect.exceptions.FirestoreExecuteException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.*;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 
-import static fireconnect.types.FirestoreErrorType.*;
+import static io.bsgabriel.fireconnect.types.FirestoreErrorType.*;
 import static java.util.Objects.isNull;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 

@@ -1,6 +1,6 @@
-package fireconnect.exceptions;
+package io.bsgabriel.fireconnect.exceptions;
 
-import fireconnect.types.FirestoreErrorType;
+import io.bsgabriel.fireconnect.types.FirestoreErrorType;
 import lombok.Getter;
 
 @Getter

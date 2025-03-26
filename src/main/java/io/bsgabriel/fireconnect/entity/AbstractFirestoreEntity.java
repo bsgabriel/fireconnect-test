@@ -1,4 +1,4 @@
-package fireconnect.entity;
+package io.bsgabriel.fireconnect.entity;
 
 import lombok.Data;
 
