@@ -22,8 +22,11 @@ jobs:
       - name: Check version in pom.xml
         run: |
           TAG_VERSION=${GITHUB_REF#refs/tags/}
-          TAG_VERSION=$(echo "$TAG_VERSION" | sed 's/^V//')  # Remove o prefixo 'V'
+          echo tag1 $TAG_VERSION
+          TAG_VERSION=$(echo "$TAG_VERSION" | sed 's/^v//')  # Remove o prefixo 'V'
+          echo tag2 $TAG_VERSION
           POM_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+          echo pom version POM_VERSION
           
           if [ "$TAG_VERSION" != "$POM_VERSION" ]; then
             echo "A versão no pom.xml ($POM_VERSION) não corresponde à tag ($TAG_VERSION)."
