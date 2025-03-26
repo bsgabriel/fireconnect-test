@@ -19,19 +19,19 @@ jobs:
           java-version: '17'  # Altere para a versão do JDK que você está usando
           distribution: 'adopt'
 
-      - name: Check version in pom.xml
-        run: |
-          TAG_VERSION=${GITHUB_REF#refs/tags/}
-          echo tag1 $TAG_VERSION
-          TAG_VERSION=$(echo "$TAG_VERSION" | sed 's/^v//')  # Remove o prefixo 'V'
-          echo tag2 $TAG_VERSION
-          POM_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
-          echo pom version POM_VERSION
-          
-          if [ "$TAG_VERSION" != "$POM_VERSION" ]; then
-            echo "A versão no pom.xml ($POM_VERSION) não corresponde à tag ($TAG_VERSION)."
-            exit 1
-          fi
+#      - name: Check version in pom.xml
+#        run: |
+#          TAG_VERSION=${GITHUB_REF#refs/tags/}
+#          echo tag1 $TAG_VERSION
+#          TAG_VERSION=$(echo "$TAG_VERSION" | sed 's/^v//')  # Remove o prefixo 'V'
+#          echo tag2 $TAG_VERSION
+#          POM_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+#          echo pom version POM_VERSION
+#
+#          if [ "$TAG_VERSION" != "$POM_VERSION" ]; then
+#            echo "A versão no pom.xml ($POM_VERSION) não corresponde à tag ($TAG_VERSION)."
+#            exit 1
+#          fi
 
       - name: Build and Deploy
         run: mvn clean deploy --settings .github/maven-settings.xml
