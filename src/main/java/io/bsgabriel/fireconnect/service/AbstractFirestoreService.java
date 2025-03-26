@@ -29,7 +29,7 @@ public abstract class AbstractFirestoreService<T extends AbstractFirestoreEntity
 
     protected DocumentReference addDocument(T obj) {
         if (isNull(obj))
-            throw new FirestoreExecuteException(FIRESTORE_DATA_CREATION, "No data provided to save");
+            throw new FirestoreExecuteException(FIRESTORE_DATA_CREATION, "No data provided to save.");
 
         try {
             return this.firestore.collection(this.getCollectionName())
