@@ -34,7 +34,7 @@ jobs:
 #          fi
 
       - name: Build and Deploy
-        run: mvn clean deploy --settings .github/maven-settings.xml
+        run: mvn clean deploy --settings .github/maven-settings.xml -X
         env:
           GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
           GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
