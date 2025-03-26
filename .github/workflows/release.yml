@@ -2,8 +2,8 @@ name: Deploy to Maven Central
 
 on:
   push:
-    tags:
-      - 'v*'  # Aciona o workflow quando um novo tag que começa com 'v' é criado
+    branches:
+      - master
 
 jobs:
   deploy:
