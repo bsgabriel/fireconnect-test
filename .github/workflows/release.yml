@@ -22,7 +22,7 @@ jobs:
       - name: Check version in pom.xml
         run: |
           TAG_VERSION=${GITHUB_REF#refs/tags/}
-          TAG_VERSION=$(echo "$TAG_VERSION" | sed 's/^v//')  # Remove o prefixo 'V'
+          TAG_VERSION=$(echo "$TAG_VERSION" | sed 's/^V//')  # Remove o prefixo 'V'
           POM_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
           
           if [ "$TAG_VERSION" != "$POM_VERSION" ]; then
