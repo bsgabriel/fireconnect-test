@@ -40,14 +40,14 @@ jobs:
         env:
           GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
 
-      # - name: Set GPG TTY
-      #   run: echo "export GPG_TTY=$(tty)" >> $GITHUB_ENV
+      - name: Set GPG TTY
+        run: echo "export GPG_TTY=$(tty)" >> $GITHUB_ENV
 
       - name: Build and Deploy
         run: mvn clean deploy --settings .github/maven-settings.xml -X
         env:
 #          GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
-          # GPG_TTY: /dev/tty
+          GPG_TTY: /dev/tty
           GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
           MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
