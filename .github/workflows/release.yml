@@ -39,6 +39,7 @@ jobs:
           echo "$GPG_PRIVATE_KEY" | gpg --import --batch --yes
         env:
           GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
 
       - name: Set GPG TTY
         run: echo "export GPG_TTY=$(tty)" >> $GITHUB_ENV
@@ -48,6 +49,5 @@ jobs:
         env:
 #          GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
           GPG_TTY: /dev/tty
-          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
           MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
