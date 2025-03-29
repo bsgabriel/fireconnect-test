@@ -40,6 +40,9 @@ jobs:
         env:
           GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
 
+      - name: Set GPG TTY
+        run: echo "export GPG_TTY=$(tty)" >> $GITHUB_ENV
+
       - name: Build and Deploy
         run: mvn clean deploy --settings .github/maven-settings.xml -X
         env:
