@@ -11,7 +11,11 @@ jobs:
       packages: write
     steps:
       - uses: actions/checkout@v4
-      - name: Set up Java for publishing to Maven Central Repository
+      - name: Debug GPG Key
+        run: |
+          echo "${{ secrets.GPG_PRIVATE_KEY }}" > gpg_key_debug.asc
+          cat gpg_key_debug.asc
+      - name: Set up Java for publishing to Maven Central
         uses: actions/setup-java@v4
         with:
           java-version: '17'
@@ -21,9 +25,6 @@ jobs:
           server-password: MAVEN_PASSWORD
           gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
           gpg-passphrase: ${{ secrets.GPG_PASSPHRASE }}
-      - name: Debug GPG
-        run: |
-          echo "${{ secrets.GPG_PRIVATE_KEY }}" | base64 --decode | gpg --list-packets
       - name: Import GPG Key
         run: |
           echo "${{ secrets.GPG_PRIVATE_KEY }}" | base64 --decode | gpg --batch --import
