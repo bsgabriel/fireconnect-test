@@ -18,6 +18,11 @@ jobs:
           server-password: MAVEN_PASSWORD
           gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
           gpg-passphrase: MAVEN_GPG_PASSPHRASE
+      - name: Import GPG Key
+        run: |
+          echo "$GPG_PRIVATE_KEY" | gpg --import --batch --yes
+        env:
+          GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
 #      - name: Set version
 #        run: mvn versions:set -DnewVersion=${{ github.event.release.tag_name }}
       - name: Publish package
