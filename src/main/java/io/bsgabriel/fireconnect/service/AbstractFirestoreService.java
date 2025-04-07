@@ -90,7 +90,7 @@ public abstract class AbstractFirestoreService<T extends AbstractFirestoreEntity
 
         final DocumentSnapshot document;
         try {
-             document = this.firestore.collection(this.getCollectionName())
+            document = this.firestore.collection(this.getCollectionName())
                     .document(documentId)
                     .get()
                     .get();
@@ -115,10 +115,11 @@ public abstract class AbstractFirestoreService<T extends AbstractFirestoreEntity
         if (obj == null)
             return new HashMap<>(0);
 
-        Map<String, Object> map = this.objectMapper.convertValue(obj, new TypeReference<>() {
+//        Map<String, Object> map = this.objectMapper.convertValue(obj, new TypeReference<>() {
+//        });
+//        map.remove("id");
+        return this.objectMapper.convertValue(obj, new TypeReference<>() {
         });
-        map.remove("id");
-        return map;
     }
 
     private Map<String, Object> removeNulls(Map<String, Object> map) {
