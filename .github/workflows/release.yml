@@ -20,6 +20,11 @@ jobs:
       - name: Update POM version
         run: mvn versions:set -DnewVersion=${{ env.VERSION }}
 
+      - name: Configure Git user
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
       - name: Update CHANGELOG
         run: |
           sed -i "s/CURRENT/${{ env.VERSION }}/g" CHANGELOG.md
