@@ -9,3 +9,4 @@
 ### Changed
 - Agora, ao fazer busca o ID é retornado
 - Ajuste no RELEASE
+- Ajuste release 2
