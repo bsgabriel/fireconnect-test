@@ -20,25 +20,27 @@ jobs:
           VERSION=$(echo "$MERGE_COMMIT" | grep -oE 'release/[0-9]+\.[0-9]+\.[0-9]+' | cut -d'/' -f2)
           echo "VERSION=$VERSION" >> $GITHUB_ENV
 
-      - name: Update POM version
-        run: mvn versions:set -DnewVersion=${{ env.VERSION }}
-
       - name: Configure Git user
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Authenticate before pushing release
-        run: |
-          git remote set-url origin https://x-access-token:${{ secrets.GH_PUSH_TOKEN }}@github.com/${{ github.repository }}
-
-      - name: Update CHANGELOG
+      - name: Update CHANGELOG and commit release
         run: |
           sed -i "s/CURRENT/${{ env.VERSION }}/g" CHANGELOG.md
           git add pom.xml CHANGELOG.md
           git commit -m "Release version ${{ env.VERSION }}"
           git tag v${{ env.VERSION }}
-          git push origin main --tags
+
+      - name: Update POM version
+        run: mvn versions:set -DnewVersion=${{ env.VERSION }}
+
+      - name: Authenticate before pushing release
+        run: |
+          git remote set-url origin https://x-access-token:${{ secrets.GH_PUSH_TOKEN }}@github.com/${{ github.repository }}
+
+      - name: Push release commit and tag
+        run: git push origin main --tags
 
       - name: Publish to Maven Central
         run: |
