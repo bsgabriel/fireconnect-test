@@ -7,6 +7,7 @@ import com.google.cloud.firestore.DocumentSnapshot;
 import com.google.cloud.firestore.Firestore;
 import io.bsgabriel.fireconnect.entity.AbstractFirestoreEntity;
 import io.bsgabriel.fireconnect.exceptions.FirestoreExecuteException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.*;
@@ -17,6 +18,7 @@ import static io.bsgabriel.fireconnect.types.FirestoreErrorType.*;
 import static java.util.Objects.isNull;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
+@Slf4j
 public abstract class AbstractFirestoreService<T extends AbstractFirestoreEntity> {
 
     @Autowired
@@ -115,9 +117,11 @@ public abstract class AbstractFirestoreService<T extends AbstractFirestoreEntity
         if (obj == null)
             return new HashMap<>(0);
 
-//        Map<String, Object> map = this.objectMapper.convertValue(obj, new TypeReference<>() {
-//        });
+        Map<String, Object> map = this.objectMapper.convertValue(obj, new TypeReference<>() {
+        });
 //        map.remove("id");
+        log.info("objeto retornado");
+        log.info(map.toString());
         return this.objectMapper.convertValue(obj, new TypeReference<>() {
         });
     }
