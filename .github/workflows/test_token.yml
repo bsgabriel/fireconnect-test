@@ -1,27 +1,29 @@
-name: Test GH_PUSH_TOKEN
+name: Test Token Push
 
 on:
   workflow_dispatch:
 
 jobs:
-  test-push:
+  push-test:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repositório
+      - name: Checkout
         uses: actions/checkout@v4
+        with:
+          persist-credentials: false  # <- ESSENCIAL! Não deixar ele usar o GITHUB_TOKEN
 
-      - name: Configura usuário git
+      - name: Set up Git user
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Autentica com token
+      - name: Create dummy commit
+        run: |
+          echo "Test at $(date)" >> push-test.txt
+          git add push-test.txt
+          git commit -m "Testing manual push with classic token"
+
+      - name: Override remote with classic token
         run: |
           git remote set-url origin https://x-access-token:${{ secrets.GH_PUSH_TOKEN }}@github.com/${{ github.repository }}
-
-      - name: Faz commit de teste e push
-        run: |
-          echo "Test $(date)" >> test-token.txt
-          git add test-token.txt
-          git commit -m "Test push with GH_PUSH_TOKEN"
-          git push origin HEAD:test-push-token
+          git push origin main
