@@ -35,11 +35,23 @@ jobs:
 
       - name: Update CHANGELOG and commit release
         run: |
+          echo "version: ${{ env.VERSION }}
           sed -i "s/CURRENT/${{ env.VERSION }}/g" CHANGELOG.md
           git add pom.xml CHANGELOG.md
           git commit -m "Release version ${{ env.VERSION }}"
           git tag v${{ env.VERSION }}
           git push origin main --tags
+
+      - name: Set up Maven Central Repository
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          server-id: central
+          server-username: MAVEN_USERNAME
+          server-password: MAVEN_PASSWORD
+          gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
+          gpg-passphrase: MAVEN_GPG_PASSPHRASE
 
       - name: Publish to Maven Central
         run: |
