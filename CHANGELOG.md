@@ -8,5 +8,6 @@
 
 ### Changed
 - Agora, ao fazer busca o ID é retornado
-- Ajuste no RELEASE
-- Ajuste release 2
+- Ajuste no RELEASE: n lembro oq foi
+- Ajuste release 2: n lembro oq foi
+- - Ajuste release 3: autenticação
