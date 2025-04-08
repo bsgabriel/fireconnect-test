@@ -25,22 +25,20 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
+      - name: Authenticate to GitHub using token
+        run: |
+          git remote set-url origin https://x-access-token:${{ secrets.GH_PUSH_TOKEN }}@github.com/${{ github.repository }}
+
+      - name: Update POM version
+        run: mvn versions:set -DnewVersion=${{ env.VERSION }}
+
       - name: Update CHANGELOG and commit release
         run: |
           sed -i "s/CURRENT/${{ env.VERSION }}/g" CHANGELOG.md
           git add pom.xml CHANGELOG.md
           git commit -m "Release version ${{ env.VERSION }}"
           git tag v${{ env.VERSION }}
-
-      - name: Update POM version
-        run: mvn versions:set -DnewVersion=${{ env.VERSION }}
-
-      - name: Authenticate before pushing release
-        run: |
-          git remote set-url origin https://x-access-token:${{ secrets.GH_PUSH_TOKEN }}@github.com/${{ github.repository }}
-
-      - name: Push release commit and tag
-        run: git push origin main --tags
+          git push origin main --tags
 
       - name: Publish to Maven Central
         run: |
@@ -57,10 +55,4 @@ jobs:
           echo -e "## CURRENT\n\n" | cat - CHANGELOG.md > temp && mv temp CHANGELOG.md
           git add pom.xml CHANGELOG.md
           git commit -m "Prepare for next development cycle ($NEXT_VERSION)"
-
-      - name: Authenticate before pushing next snapshot
-        run: |
-          git remote set-url origin https://x-access-token:${{ secrets.GH_PUSH_TOKEN }}@github.com/${{ github.repository }}
-
-      - name: Push next snapshot version
-        run: git push origin main
+          git push origin main
