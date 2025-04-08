@@ -12,3 +12,4 @@
 - Ajuste release 2: n lembro oq foi
 - Ajuste release 3: autenticação
 - Ajuste release 4: autenticação dnv
+- Ajuste release 5: autenticação dnv 
