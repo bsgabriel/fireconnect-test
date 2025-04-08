@@ -35,7 +35,7 @@ jobs:
 
       - name: Update CHANGELOG and commit release
         run: |
-          echo "version: ${{ env.VERSION }}
+          echo "version: ${{ env.VERSION }}"
           sed -i "s/CURRENT/${{ env.VERSION }}/g" CHANGELOG.md
           git add pom.xml CHANGELOG.md
           git commit -m "Release version ${{ env.VERSION }}"
