@@ -1,6 +1,14 @@
 # Changelog
 
-## 
+## CURRENT
+
+### Added
+- classe de teste
+
+### Changed
+- alguns logs
+
+## 1.0.2
 
 ### Added
 - Criado fluxo de deploy
