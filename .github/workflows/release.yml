@@ -28,6 +28,10 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
+      - name: Authenticate before pushing release
+        run: |
+          git remote set-url origin https://x-access-token:${{ secrets.GH_PUSH_TOKEN }}@github.com/${{ github.repository }}
+
       - name: Update CHANGELOG
         run: |
           sed -i "s/CURRENT/${{ env.VERSION }}/g" CHANGELOG.md
@@ -51,4 +55,10 @@ jobs:
           echo -e "## CURRENT\n\n" | cat - CHANGELOG.md > temp && mv temp CHANGELOG.md
           git add pom.xml CHANGELOG.md
           git commit -m "Prepare for next development cycle ($NEXT_VERSION)"
-          git push origin main
+
+      - name: Authenticate before pushing next snapshot
+        run: |
+          git remote set-url origin https://x-access-token:${{ secrets.GH_PUSH_TOKEN }}@github.com/${{ github.repository }}
+
+      - name: Push next snapshot version
+        run: git push origin main
