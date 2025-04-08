@@ -14,8 +14,11 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Extract version from branch name
-        run: echo "VERSION=$(git branch --show-current | cut -d'/' -f2)" >> $GITHUB_ENV
+      - name: Extract version from merged branch name
+        run: |
+          MERGE_COMMIT=$(git log -1 --pretty=%B)
+          VERSION=$(echo "$MERGE_COMMIT" | grep -oE 'release/[0-9]+\.[0-9]+\.[0-9]+' | cut -d'/' -f2)
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
 
       - name: Update POM version
         run: mvn versions:set -DnewVersion=${{ env.VERSION }}
