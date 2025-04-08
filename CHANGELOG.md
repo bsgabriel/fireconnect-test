@@ -1,6 +1,11 @@
 # Changelog
 
-## CURRENT
+## Current
+
+### Changed
+- sla eu fiz alguma coisa ai
+
+## 1.0.3
 
 ### Added
 - classe de teste
