@@ -1,5 +1,10 @@
 # Changelog
 
+## Current
+
+### Changed
+- Agora vai tudo
+
 ## 1.3.3
 - Ajustado arquivos release 3
 
