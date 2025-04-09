@@ -1,6 +1,6 @@
 # Changelog
 
-## Current
+## 1.3.3
 - Ajustado arquivos release 3
 
 ## 1.2.0
