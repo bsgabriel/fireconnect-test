@@ -79,7 +79,5 @@ jobs:
           body_path: body.md
           files: |
             target/*.jar
-            target/*-sources.jar
-            target/*-javadoc.jar
         env:
           GITHUB_TOKEN: ${{ secrets.GH_PUSH_TOKEN }}
