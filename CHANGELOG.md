@@ -1,12 +1,11 @@
 ## CURRENT
 
-
 # Changelog
 
-## Current
+## CURRENT
 
 ### Changed
-- sla eu fiz alguma coisa ai
+- Correção no changelog 
 
 ## 1.0.3
 
