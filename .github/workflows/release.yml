@@ -40,7 +40,6 @@ jobs:
           git add pom.xml CHANGELOG.md
           git commit -m "Release version ${{ env.VERSION }}"
           git tag v${{ env.VERSION }}
-          git push origin main --tags
 
       - name: Set up Maven Central Repository
         uses: actions/setup-java@v4
@@ -65,5 +64,27 @@ jobs:
         run: |
           awk '/^# Changelog/ { print; print ""; print "## Current\n"; next } 1' CHANGELOG.md > temp && mv temp CHANGELOG.md
           git add pom.xml CHANGELOG.md
-          git commit -m "Prepare for next development cycle"
-          git push origin main
+          git commit -m "Prepare for next development cycle ($NEXT_VERSION)"
+
+      - name: Push all changes and tags
+        run: |
+          git push origin main --follow-tags
+
+      - name: Extract changelog for release
+        run: |
+          awk -v version="## ${{ env.VERSION }}" '
+            BEGIN { in_section=0 }
+            $0 ~ version { in_section=1; next }
+            /^## / && in_section { exit }
+            in_section { print }
+          ' CHANGELOG.md > RELEASE_NOTES.md
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v${{ env.VERSION }}
+          name: Release ${{ env.VERSION }}
+          body_path: RELEASE_NOTES.md
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
