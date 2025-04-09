@@ -2,9 +2,12 @@
 
 ## Current
 
+### Changed
+- Ajustei o pom.xml
+- Ajustei o release
 
-## 
-
+### Added
+- Adicionei release do git :3
 
 ## 1.0.8
 
