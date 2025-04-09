@@ -1,6 +1,6 @@
 # Changelog
 
-## Current
+## 1.2.0
 
 ### Removed
 - Removido classe de teste
