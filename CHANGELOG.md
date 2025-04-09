@@ -1,7 +1,7 @@
 # Changelog
 
 ## Current
-- Ajustado arquivos release 2
+- Ajustado arquivos release 3
 
 ## 1.2.0
 
