@@ -1,6 +1,6 @@
 # Changelog
 
-## Current
+## 1.0.7
 
 ### Changed
 - Correção no changelog DE NOVOOO
