@@ -1,6 +1,6 @@
 # Changelog
 
-## Current
+## 1.1.0
 
 ### Changed
 - Ajustei o pom.xml
