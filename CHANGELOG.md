@@ -2,6 +2,8 @@
 
 ## Current
 
+### Changed
+- Eu exclui uma TAG. Vamos ver se para de dar pau. 
 
 ## 1.0.7
 
