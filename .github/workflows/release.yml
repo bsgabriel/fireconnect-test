@@ -64,27 +64,26 @@ jobs:
         run: |
           awk '/^# Changelog/ { print; print ""; print "## Current\n"; next } 1' CHANGELOG.md > temp && mv temp CHANGELOG.md
           git add pom.xml CHANGELOG.md
-          git commit -m "Prepare for next development cycle ($NEXT_VERSION)"
+          git commit -m "Prepare for next development cycle"
 
       - name: Push all changes and tags
         run: |
           git push origin main --follow-tags
 
-      - name: Extract changelog for release
+      - name: Extract changelog entry for GitHub Release
+        id: extract_changelog
         run: |
-          awk -v version="## ${{ env.VERSION }}" '
-            BEGIN { in_section=0 }
-            $0 ~ version { in_section=1; next }
-            /^## / && in_section { exit }
-            in_section { print }
-          ' CHANGELOG.md > RELEASE_NOTES.md
+          VERSION=${{ env.VERSION }}
+          {
+            echo "## $VERSION"
+            awk "/^## $VERSION/{flag=1; next} /^## /{flag=0} flag" CHANGELOG.md
+          } > body.md
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
           tag_name: v${{ env.VERSION }}
-          name: Release ${{ env.VERSION }}
-          body_path: RELEASE_NOTES.md
+          name: v${{ env.VERSION }}
+          body_path: body.md
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
