@@ -36,7 +36,7 @@ jobs:
       - name: Update CHANGELOG and commit release
         run: |
           echo "version: ${{ env.VERSION }}"
-          sed -i "s/CURRENT/${{ env.VERSION }}/g" CHANGELOG.md
+          sed -i "s/Current/${{ env.VERSION }}/g" CHANGELOG.md
           git add pom.xml CHANGELOG.md
           git commit -m "Release version ${{ env.VERSION }}"
           git tag v${{ env.VERSION }}
@@ -63,9 +63,7 @@ jobs:
 
       - name: Set next snapshot version
         run: |
-          NEXT_VERSION=$(echo ${{ env.VERSION }} | awk -F. '{$NF += 1; print $0 "-SNAPSHOT"}' OFS=.)
-          mvn versions:set -DnewVersion=$NEXT_VERSION
-          awk '/^# Changelog/ { print; print ""; print "## CURRENT\n"; next } 1' CHANGELOG.md > temp && mv temp CHANGELOG.md
+          awk '/^# Changelog/ { print; print ""; print "## Current\n"; next } 1' CHANGELOG.md > temp && mv temp CHANGELOG.md
           git add pom.xml CHANGELOG.md
-          git commit -m "Prepare for next development cycle ($NEXT_VERSION)"
+          git commit -m "Prepare for next development cycle"
           git push origin main
