@@ -1,14 +1,9 @@
-## CURRENT
-
 # Changelog
 
 ## Current
 
-
-## CURRENT
-
 ### Changed
-- Correção no changelog 
+- Correção no changelog DE NOVOOO
 
 ## 1.0.3
 
