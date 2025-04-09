@@ -2,6 +2,8 @@
 
 ## Current
 
+### Removed
+- Removido classe de teste
 
 ## 1.1.1
 
