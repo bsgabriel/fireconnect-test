@@ -1,6 +1,6 @@
 # Changelog
 
-## Current
+## 1.0.8
 
 ### Changed
 - Eu exclui uma TAG. Vamos ver se para de dar pau. 
