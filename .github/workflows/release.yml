@@ -42,13 +42,13 @@ jobs:
           gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
           gpg-passphrase: MAVEN_GPG_PASSPHRASE
 
+      - name: Update POM version
+        run: mvn versions:set -DnewVersion=${{ env.VERSION }}
+
       - name: Verify project
         run: |
           export GPG_TTY=$(tty)
           $MAVEN_CMD clean verify
-
-      - name: Update POM version
-        run: mvn versions:set -DnewVersion=${{ env.VERSION }}
 
       - name: Update CHANGELOG and commit
         run: |
