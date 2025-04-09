@@ -1,5 +1,8 @@
 # Changelog
 
+## Current
+- Ajustado arquivos release
+
 ## 1.2.0
 
 ### Removed
