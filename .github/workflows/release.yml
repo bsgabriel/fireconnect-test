@@ -30,6 +30,9 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git remote set-url origin https://x-access-token:${{ secrets.GH_PUSH_TOKEN }}@github.com/${{ github.repository }}
 
+      - name: Verify project
+        run: mvn clean verify
+
       - name: Update POM version
         run: mvn versions:set -DnewVersion=${{ env.VERSION }}
 
@@ -71,5 +74,9 @@ jobs:
           tag_name: v${{ env.VERSION }}
           name: v${{ env.VERSION }}
           body_path: body.md
+          files: |
+            target/*.jar
+            target/*-sources.jar
+            target/*-javadoc.jar
         env:
           GITHUB_TOKEN: ${{ secrets.GH_PUSH_TOKEN }}
